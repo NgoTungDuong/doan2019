@@ -2,7 +2,8 @@ import React from 'react';
 import { MDBMask, MDBRow, MDBCol, MDBView, MDBContainer } from 'mdbreact';
 import '../css/maincontent.css';
 import DropFile from '../component/DropFile';
-import CreateFile from '../component/CreateFile'
+import CreateFile from '../component/CreateFile';
+import ShowFile from '../component/ShowFile';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 class MainContent extends React.Component {
@@ -17,10 +18,11 @@ class MainContent extends React.Component {
                     <MDBMask className="d-flex justify-content-center align-items-center gradient">
                         <MDBContainer className="px-md-3 px-sm-0">
                             <MDBRow>
-                                <MDBCol md="12" className="mb-4 white-text text-center">
+                                <MDBCol md="12" className="mb-5 white-text text-center">
                                     <BrowserRouter>
                                         <Route exact path='/' render={(props) => <DropFile {...props} handleOnclick={this.props.handleOnclick}/>} />
                                         <Route path='/create-file' render={(props) => <CreateFile {...props} handleOnsubmit={this.props.handleOnsubmit} onLoadDataDownload={this.props.onLoadDataDownload}/>} />
+                                        {this.props.fileHash ? <Route patch='/show-file' render={(props) => <ShowFile fileHash={this.props.fileHash}/>} /> : null}
                                     </BrowserRouter>
                                 </MDBCol>
                             </MDBRow>

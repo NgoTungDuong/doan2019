@@ -45,7 +45,7 @@ export default class CreateFile extends Component {
         var element = document.createElement('a');
         element.style.display = 'none';
         element.setAttribute('href', 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data)));
-        element.setAttribute("download", "scene2.json");
+        element.setAttribute("download", fileName + ".json");
         document.body.appendChild(element);
         element.click();
         document.body.removeChild(element);

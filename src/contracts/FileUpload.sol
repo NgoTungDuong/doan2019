@@ -12,4 +12,5 @@ contract FileUpload {
     function get() public view returns (string memory ) {
         return fileHash;
     }
-}
+}  
+  

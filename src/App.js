@@ -5,6 +5,7 @@ import NavBar from './containers/NavBar';
 import './css/maincontent.css';
 import MainContent from './containers/MainContent';
 import FileUpload from './abis/FileUpload.json';
+import { Link } from 'react-router-dom';
 
 const ipfsClient = require('ipfs-http-client');
 const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https'});
@@ -38,7 +39,8 @@ class App extends Component {
       buffer: null,
       fileHash: '',
       ipfsHash: '',
-      inputTransaction: ''
+      inputTransaction: '',
+      
     };
   }
 
@@ -64,6 +66,7 @@ class App extends Component {
     window.alert('Please wait a second to upload ....')
     ipfs.add(file, async (error, result) => {
       console.log('IPFS result', result)
+      if(!result) return window.alert('Server busy, please try again!')
       const ipfsHash = result[0].hash;
       if(!ipfsHash) {
         window.alert('Server busy, please try again ...')
@@ -108,7 +111,12 @@ class App extends Component {
     }
     const result = decoder.decodeData(this.state.inputTransaction)
     this.setState({ fileHash: result.inputs[0]})
-    console.log('link anh: ', this.state.fileHash) 
+    console.log('link anh: ', this.state.fileHash)
+    return (
+      <div>
+        <Link to='/show-file'></Link>
+      </div>
+    );
   }
 
   render() {
@@ -122,6 +130,7 @@ class App extends Component {
                 handleOnclick={this.handleOnclick} 
                 handleOnsubmit={this.onSubmit}
                 onLoadDataDownload={this.onLoadDataDownload}
+                fileHash={this.state.fileHash}
                 />
             </div>
           </div>

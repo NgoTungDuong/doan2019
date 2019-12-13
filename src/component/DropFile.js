@@ -28,7 +28,7 @@ export default class DropFile extends Component {
     
     render() {
         return (
-            <div>
+            <div style={{marginBottom: "15%"}}>
                 <div>
                     <input type="file" accept="application/json" onChange={this.handleOnChange} style={{cursor: "pointer"}}/>
                 </div>
